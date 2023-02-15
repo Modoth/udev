@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-if [[ ! -f ~/.tmprc ]];then
+if [[ ! -f /home/dev/.tmprc ]];then
 apt update
 apt full-upgrade -y
 
@@ -18,7 +18,7 @@ for d in $Paths;do
   fi
 done
 
-cat > ~/.tmprc <<EOF
+cat > /home/dev/.tmprc <<EOF
 for d in $Paths;do
   f="\$d/.rc"
   if [[ -f "\$f" ]];then
@@ -28,7 +28,7 @@ done
 EOF
 fi
 
-start="$HOME/.commons/main/start"
+start="/home/dev/.commons/main/start"
 if [ -f "$start" ];then
   exec su - dev -P -c "$start"
 else
