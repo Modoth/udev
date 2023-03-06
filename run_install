@@ -1,0 +1,29 @@
+#!/usr/bin/env zsh
+if [[ ! -f /home/dev/.tmprc ]];then
+apt update
+apt full-upgrade -y
+
+Paths=(`ls -d /home/dev/.commons/*`) 
+for d in $Paths;do
+  f="$d/.install"
+  if [[ -f "$f" ]];then
+    source "$f"
+  fi
+done
+
+for d in $Paths;do
+  f="$d/.postinstall"
+  if [[ -f "$f" ]];then
+    source "$f"
+  fi
+done
+
+cat > /home/dev/.tmprc <<EOF
+for d in $Paths;do
+  f="\$d/.rc"
+  if [[ -f "\$f" ]];then
+    source "\$f"
+  fi
+done
+EOF
+fi
