@@ -19,8 +19,15 @@ for d in $Paths;do
 done
 
 cat > /home/dev/.tmprc <<EOF
-for d in $Paths;do
+dev_plugins=(${(@qq)Paths})
+for d in \$dev_plugins;do
   f="\$d/.rc"
+  if [[ -f "\$f" ]];then
+    source "\$f"
+  fi
+done
+for d in \$dev_plugins;do
+  f="\$d/.post_rc"
   if [[ -f "\$f" ]];then
     source "\$f"
   fi
