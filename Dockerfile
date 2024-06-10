@@ -1,14 +1,13 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 ADD ohmyzsh ./oh-my-zsh
 
 RUN true \
-&& echo 'APT::Install-Recommends 0;\nAPT::Install-Suggests 0;\n' > /etc/apt/apt.conf.d/99norecommends \
+&& echo 'APT::Install-Recommends 0;\nAPT::Install-Suggests 0;' > /etc/apt/apt.conf.d/99norecommends \
 && apt update \
 && apt full-upgrade -y \
 && yes | unminimize \
 && DEBIAN_FRONTEND=noninteractive apt install -y \
-    byobu \
     curl \
     git \
     less \
